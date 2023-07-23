@@ -12,6 +12,5 @@ export class LayoutPageComponent {
     { label: 'List Heroes', icon: 'label', url: './list-hero'},
     { label: 'Add Heroes', icon: 'add', url: './new-hero'},
     { label: 'Search Heroes', icon: 'search', url: './search-hero'},
-    { label: 'Dark Mode', icon: 'search', url: './search-hero'},
   ]
 }

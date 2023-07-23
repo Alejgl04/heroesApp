@@ -33,7 +33,12 @@
     <span>
     </span>
     <span (click)="toggleDarkMode()">
-      <mat-icon [ngStyle]="!isDarkMode ? {'color':'white'} : {'color':'yellow'}">{{ isDarkMode ? 'light_mode':'dark_mode' }}</mat-icon>
+      <mat-icon
+        [ngStyle]="!isDarkMode
+                    ? {'color':'white'}
+                    : {'color':'yellow'}">
+                    {{ isDarkMode ? 'light_mode':'dark_mode' }}
+      </mat-icon>
     </span>
   </mat-toolbar>
 

@@ -166,6 +166,15 @@
       "alter_ego": "Norrin Radd",
       "first_appearance": "The Fantastic Four #48",
       "characters": "Norrin Radd"
+    },
+    {
+      "id": "CBy-9Lz",
+      "superhero": "Thanos",
+      "publisher": "Marvel Comics",
+      "alter_ego": "Warlock",
+      "first_appearance": "Marvel 2000",
+      "characters": "Thanatos",
+      "alt_img": "https://bbts1.azureedge.net/images/p/full/2023/04/1d0f9f4d-6850-4159-9b2f-a0f28644ce74.jpg"
     }
   ]
 }

@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap, tap, filter } from 'rxjs';
+
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { switchMap } from 'rxjs';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-new-hero-page',
@@ -16,7 +21,9 @@ export class NewHeroPageComponent implements OnInit {
   constructor(
     private readonly heroesService: HeroesService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -66,15 +73,39 @@ export class NewHeroPageComponent implements OnInit {
     if ( this.currentHero.id ) {
       this.heroesService.updateHero( this.currentHero )
         .subscribe( hero => {
-          // TODO: show snacbkar
+          this.showSnackbar(`${ hero.superhero } updated`);
         });
       return;
     }
 
     this.heroesService.addHero( this.currentHero )
       .subscribe( hero => {
-        // TODO: show snackbar and navigate to /heroes/edit.........
+        this.router.navigate(['/heroes/edit', hero.id])
+        this.showSnackbar(`${ hero.superhero } created`);
       })
+  }
 
+  onDeleteHero(){
+    if ( !this.currentHero.id ) throw Error(`Hero id is required`);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: this.heroForm.value
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter( (result: boolean ) => result === true ),
+        switchMap( () => this.heroesService.deleteHeroById( this.currentHero.id )),
+        filter( (wasDeleted: boolean ) => wasDeleted ),
+      )
+      .subscribe(result => {
+        this.router.navigate(['/heroes']);
+    });
+ }
+
+  showSnackbar( message: string ): void {
+    this.snackbar.open( message, 'Done', {
+      duration: 2500
+    })
   }
 }

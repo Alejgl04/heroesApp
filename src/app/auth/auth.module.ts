@@ -19,7 +19,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
   imports: [
     CommonModule,
     AuthRoutingModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class AuthModule { }

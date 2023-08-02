@@ -1,3 +1,4 @@
+import { ThemeService } from './services/theme.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'heroesApp';
+
+  public isDarkMode!: boolean;
+  public iconColor?: string;
+
+
+  constructor(
+    private themeService: ThemeService
+  ){
+    this.themeService.initTheme();
+
+  }
+
 }

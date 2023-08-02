@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../services/hero-theme.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/auth/interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout-page',
@@ -19,16 +22,27 @@ export class LayoutPageComponent {
   ];
 
   constructor(
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private authService: AuthService,
+    private router: Router,
   ){
     this.themeService.initTheme();
     this.isDarkMode = this.themeService.isDarkMode();
+  }
 
+  get user(): User | undefined {
+    return this.authService.currentUser;
   }
 
   toggleDarkMode(): void {
     this.isDarkMode ? this.themeService.updateTheme('light-mode') : this.themeService.updateTheme('dark-mode');
     this.isDarkMode = this.themeService.isDarkMode();
+
+  }
+
+  logOut() {
+    this.authService.logOut();
+    this.router.navigate(['/auth/login']);
 
   }
 

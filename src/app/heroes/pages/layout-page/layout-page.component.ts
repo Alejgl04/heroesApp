@@ -42,7 +42,9 @@ export class LayoutPageComponent {
 
   logOut() {
     this.authService.logOut();
+    this.themeService.updateTheme('light-mode');
     this.router.navigate(['/auth/login']);
+
 
   }
 

@@ -1,5 +1,5 @@
 import { ThemeService } from './services/theme.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public isDarkMode!: boolean;
-  public iconColor?: string;
-
-
   constructor(
     private themeService: ThemeService
   ){
     this.themeService.initTheme();
-
   }
 
 }

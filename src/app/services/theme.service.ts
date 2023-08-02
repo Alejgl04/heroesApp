@@ -19,7 +19,6 @@ export class ThemeService {
     this.renderer.addClass( document.body, this.colorTheme );
    }
 
-
    private getColorTheme() {
     if ( localStorage.getItem('user-theme') ) {
       this.colorTheme = 'light-mode';
